@@ -1,4 +1,4 @@
-package edu.lalit.httpclient;
+package org.immune.wrapper.httpclient;
 
 import java.util.Properties;
 
@@ -12,12 +12,11 @@ import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.RequestEntityProcessing;
+import org.immune.wrapper.httpclient.config.ClientConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-
-import edu.lalit.httpclient.config.ClientConfiguration;
 
 /**
  * Provides a single instance of Jersey Rest Client. <br>

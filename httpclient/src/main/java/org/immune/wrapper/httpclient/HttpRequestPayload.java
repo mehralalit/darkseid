@@ -1,4 +1,4 @@
-package edu.lalit.httpclient;
+package org.immune.wrapper.httpclient;
 
 import javax.ws.rs.core.MultivaluedMap;
 

@@ -1,7 +1,7 @@
-package edu.lalit.httpclient.exception;
+package org.immune.wrapper.httpclient.exception;
 
-import edu.lalit.httpclient.HttpRequestPayload;
-import edu.lalit.httpclient.JerseyHttpClient;
+import org.immune.wrapper.httpclient.HttpRequestPayload;
+import org.immune.wrapper.httpclient.JerseyHttpClient;
 
 /**
  * Thrown when the Payload Received is Incorrect or Malformed

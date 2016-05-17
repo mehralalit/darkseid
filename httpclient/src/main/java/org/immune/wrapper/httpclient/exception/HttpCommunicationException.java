@@ -1,6 +1,6 @@
-package edu.lalit.httpclient.exception;
+package org.immune.wrapper.httpclient.exception;
 
-import edu.lalit.httpclient.JerseyHttpClient;
+import org.immune.wrapper.httpclient.JerseyHttpClient;
 
 /**
  * Thrown when Client could not connect to the Host<br/>

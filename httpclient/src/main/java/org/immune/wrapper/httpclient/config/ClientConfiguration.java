@@ -1,4 +1,4 @@
-package edu.lalit.httpclient.config;
+package org.immune.wrapper.httpclient.config;
 
 import java.io.IOException;
 import java.io.InputStream;

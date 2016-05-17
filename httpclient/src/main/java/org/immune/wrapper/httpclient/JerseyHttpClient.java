@@ -1,4 +1,4 @@
-package edu.lalit.httpclient;
+package org.immune.wrapper.httpclient;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
@@ -8,11 +8,11 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.rx.rxjava.RxObservable;
+import org.immune.wrapper.httpclient.exception.HttpCommunicationException;
+import org.immune.wrapper.httpclient.exception.IllegalPayloadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.lalit.httpclient.exception.HttpCommunicationException;
-import edu.lalit.httpclient.exception.IllegalPayloadException;
 import rx.Observable;
 
 /**
