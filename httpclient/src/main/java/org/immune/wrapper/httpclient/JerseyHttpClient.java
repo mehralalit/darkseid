@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import org.glassfish.jersey.client.rx.rxjava.RxObservable;
 import org.immune.wrapper.httpclient.exception.HttpCommunicationException;
 import org.immune.wrapper.httpclient.exception.IllegalPayloadException;
+import org.immune.wrapper.httpclient.model.ClientResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,9 +35,6 @@ public final class JerseyHttpClient {
 
 	/**
 	 * Sends a Http Post Request to a specified URL<br>
-	 * It is the duty of the callee code to close the client instance either
-	 * through close() or readEntity() <br/>
-	 * to ensure connections return to the pool<br/>
 	 * To send Form Parameters as input wrap them inside
 	 * {@linkplain MultivaluedMap} and pass along to this method as an Entity
 	 * 
@@ -46,7 +44,7 @@ public final class JerseyHttpClient {
 	 * @throws IllegalPayloadException
 	 * @see HttpRequestPayload
 	 */
-	public static Response sendHttpPostRequest(final HttpRequestPayload<?> payload)
+	public static <T> ClientResponse<T> sendHttpPostRequest(final HttpRequestPayload<?> payload, final Class<T> responseType)
 			throws HttpCommunicationException, IllegalPayloadException {
 		try {
 			final Client client = CONNECTION_MANAGER.getClient();
@@ -57,8 +55,11 @@ public final class JerseyHttpClient {
 			LOGGER.debug("entity filled {}", entity.toString());
 
 			Response response = target.request(payload.getMediaTypeConsumed()).headers(payload.getHeaders()).post(entity);
+			ClientResponse<T> clientResponse = new ClientResponse<T>();
+			clientResponse.setHeaders(response.getHeaders());
+			clientResponse.setResponse(response.readEntity(responseType));
 			LOGGER.debug("response received {}", response.toString());
-			return response;
+			return clientResponse;
 		} catch (IllegalStateException e) {
 			LOGGER.error(CLIENT_FAILURE, e);
 			throw new HttpCommunicationException(e);
@@ -72,22 +73,6 @@ public final class JerseyHttpClient {
 			LOGGER.error(e.getMessage(), e);
 			throw new HttpCommunicationException(e);
 		}
-	}
-
-	/**
-	 * Sends a Http Post Request to a specified URL<br/>
-	 * To send Form Parameters as input wrap them inside
-	 * {@linkplain MultivaluedMap} and pass along to this method as an Entity
-	 * 
-	 * @param payload {@link HttpRequestPayload}
-	 * @return {@link HttpRequestPayload}
-	 * @throws IllegalPayloadException
-	 * @throws HttpCommunicationException
-	 * @see HttpRequestPayload
-	 */
-	public static <T> T sendHttpPostRequest(final HttpRequestPayload<?> payload, final Class<T> responseType)
-			throws HttpCommunicationException, IllegalPayloadException {
-		return sendHttpPostRequest(payload).readEntity(responseType);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -106,36 +91,21 @@ public final class JerseyHttpClient {
 	 * 
 	 * @param payload {@link HttpRequestPayload}
 	 * @return {@link HttpRequestPayload}
-	 * @throws IllegalPayloadException
-	 * @throws HttpCommunicationException
-	 * @see HttpRequestPayload
-	 */
-	public static <T> T sendHttpGetRequest(final HttpRequestPayload<?> payload, final Class<T> responseType)
-			throws HttpCommunicationException, IllegalPayloadException {
-		return sendHttpGetRequest(payload).readEntity(responseType);
-	}
-
-	/**
-	 * Sends a Http Get Request to a specified URL<br>
-	 * It is the duty of the callee code to close the client instance either
-	 * through close() or readEntity() <br/>
-	 * to ensure connections return to the pool<br/>
-	 * To send Form Parameters as input wrap them inside
-	 * {@linkplain MultivaluedMap} and pass along to this method as an Entity
-	 * 
-	 * @param payload {@link HttpRequestPayload}
-	 * @return {@link HttpRequestPayload}
 	 * @throws HttpCommunicationException
 	 * @throws IllegalPayloadException
 	 * @see HttpRequestPayload
 	 */
-	public static Response sendHttpGetRequest(final HttpRequestPayload<?> payload)
+	public static <T> ClientResponse<T> sendHttpGetRequest(final HttpRequestPayload<?> payload, final Class<T> responseType)
 			throws HttpCommunicationException, IllegalPayloadException {
 		try {
 			final Client client = CONNECTION_MANAGER.getClient();
 			final WebTarget target = client.target(payload.getTarget());
 			LOGGER.debug("request target: {}", payload.getTarget());
-			return target.request(payload.getMediaTypeConsumed()).headers(payload.getHeaders()).get();
+			Response response = target.request(payload.getMediaTypeConsumed()).headers(payload.getHeaders()).get();
+			ClientResponse<T> clientResponse = new ClientResponse<T>();
+			clientResponse.setHeaders(response.getHeaders());
+			clientResponse.setResponse(response.readEntity(responseType));
+			return clientResponse;
 		} catch (IllegalStateException e) {
 			LOGGER.error(CLIENT_FAILURE, e);
 			throw new HttpCommunicationException(e);
