@@ -1,0 +1,15 @@
+Implement a key value store, with following requirements in mind:
+1. Must support concurrent read/write operations
+2. Must persist data on the disk
+3. Maximize the read/write throughput
+Implement it as a library with following interface:
+interface KVStore<K, V> {
+V get (K key);
+void put (K key, V value);
+void delete (K key);
+void clear ();
+long size ();
+}
+
+Feel free to use any web resource, but mention it clearly and also do not use any off-
+the-shelf solution.
