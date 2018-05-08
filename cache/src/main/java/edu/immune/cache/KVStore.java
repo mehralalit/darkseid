@@ -1,8 +1,7 @@
 package edu.immune.cache;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * binding contract for creating a key/value cache
@@ -24,20 +23,23 @@ public interface KVStore<K, V> {
 	 * Put key value pair to the cache
 	 * @param key key to store a value in the cache
 	 * @param value value of the supplied key
-	 * @throws JsonProcessingException
+	 * @throws IOException 
 	 */
-	public void put(K key, V value) throws JsonProcessingException;
+	public void put(K key, V value) throws IOException;
 
 	/**
 	 * Delete an entry from the cache
 	 * @param key key to delete a value from the cache
+	 * @throws IOException 
 	 */
-	public void delete(K key);
+	public void delete(K key) throws IOException;
 
 	/**
 	 * Clear the cache
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void clear();
+	public void clear() throws FileNotFoundException, IOException;
 
 	/** Get current size of the cache 
 	 * @return long size of the cache

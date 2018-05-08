@@ -15,12 +15,12 @@ public class JsonKVStoreTest {
 	public static JsonKVStore<String, String> kvStore;
 	
 	@BeforeClass
-	public static void setUp() {
+	public static void setUp() throws IOException {
 		kvStore = new JsonKVStore<String, String>(String.class);
 	}
 	
 	@Test
-	public void verifyPutMethod() {
+	public void verifyPutMethod() throws IOException {
 		try {
 			kvStore.put("key1", "value1");
 			kvStore.put("key2", "value2");
@@ -34,7 +34,7 @@ public class JsonKVStoreTest {
 	}
 	
 	@Test
-	public void verifyDeleteMethod() {
+	public void verifyDeleteMethod() throws IOException {
 		JsonKVStore<String, String> kvStore = new JsonKVStore<String, String>(String.class);
 		try {
 			kvStore.put("key1", "value1");
@@ -48,7 +48,7 @@ public class JsonKVStoreTest {
 	}
 	
 	@Test
-	public void verifyClearMethod() {
+	public void verifyClearMethod() throws IOException {
 		JsonKVStore<String, String> kvStore = new JsonKVStore<String, String>(String.class);
 		try {
 			kvStore.put("key1", "value1");
