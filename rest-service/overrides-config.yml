@@ -1,0 +1,12 @@
+logging:
+  level: INFO
+  loggers:
+    com.gitlab.zloster: DEBUG
+
+# Configure the directories from where will serve static files
+assets:
+  mappings:
+    /www: /files
+  overrides:
+    /files: /tmp/somewww
+

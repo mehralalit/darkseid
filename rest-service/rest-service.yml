@@ -1,0 +1,11 @@
+template: Hello, %s!
+defaultName: Lalit
+
+assets:
+  mappings:
+    /tmp/somewww: /files
+
+logging:
+  level: INFO
+  loggers:
+    edu.immune.dropwizard: DEBUG
