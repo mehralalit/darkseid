@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" name="RoutingTest"
+	packages="org.apache.logging.log4j.test">
+	<Properties>
+		<Property name="filename-perf">/tmp/perf/cart.log</Property>
+		<Property name="filename-prod">/tmp/prod/cart.log</Property>
+	</Properties>
+	<ThresholdFilter level="debug" />
+
+	<Appenders>
+		<Console name="STDOUT">
+			<PatternLayout pattern="%m%n" />
+			<ThresholdFilter level="debug" />
+		</Console>
+		<Routing name="Routing">
+			<Routes pattern="$${ctx:type}">
+				<Route key="perf">
+					<RollingFile name="RollingPerf" fileName="${filename-perf}"
+						filePattern="/tmp/archive/{ctx:type}/cart.%i.log.gz">
+						<PatternLayout>
+							<pattern>%d %p %c{1.} [%t] %m%n</pattern>
+						</PatternLayout>
+						<SizeBasedTriggeringPolicy size="500" />
+					</RollingFile>
+				</Route>
+				<Route ref="STDOUT" key="Audit" />
+				<Route key="$${ctx:type}">
+					<RollingFile name="RollingProd" fileName="${filename-prod}"
+						filePattern="/tmp/archive/prod/cart.%i.log.gz">
+						<PatternLayout>
+							<pattern>%d %p %c{1.} [%t] %m%n</pattern>
+						</PatternLayout>
+						<SizeBasedTriggeringPolicy size="500" />
+					</RollingFile>
+				</Route>
+			</Routes>
+		</Routing>
+	</Appenders>
+		<Loggers>
+			<Logger name="EventLogger" level="info" additivity="false">
+				<AppenderRef ref="Routing" />
+				<AppenderRef ref="RollingWO" />
+			</Logger>
+
+			<Root level="error">
+				<AppenderRef ref="STDOUT" />
+			</Root>
+		</Loggers>
+
+</Configuration>
