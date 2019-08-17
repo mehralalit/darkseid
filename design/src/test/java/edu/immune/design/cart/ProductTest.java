@@ -1,9 +1,10 @@
 package edu.immune.design.cart;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import edu.immune.design.cart.model.Product;
-import junit.framework.Assert;
+
 
 public class ProductTest {
 

@@ -17,9 +17,11 @@
 		<junit.version>3.8.1</junit.version>
 		<slf4j.version>1.7.18</slf4j.version>
 		<commonslang.version>3.0</commonslang.version>
-		<lombok.version>1.16.6</lombok.version>
 		<org.glassfish.jersey.version>2.22.1</org.glassfish.jersey.version>
 		<apache.httpclient.version>4.5.1</apache.httpclient.version>
+		
+	    <maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
 
 	</properties>
 	
@@ -71,12 +73,6 @@
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>${org.glassfish.jersey.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
 		</dependency>
 
 	</dependencies>
