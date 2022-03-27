@@ -1,4 +1,4 @@
-package edu.immune.cache;
+package edu.immune.cache.store.file;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

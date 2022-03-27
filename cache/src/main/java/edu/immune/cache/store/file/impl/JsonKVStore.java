@@ -1,4 +1,4 @@
-package edu.immune.cache.core;
+package edu.immune.cache.store.file.impl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,7 +16,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import edu.immune.cache.KVStore;
+import edu.immune.cache.store.file.KVStore;
 
 /**
  * A LRU based Key Value pair that stores the value in Json Format.<br>

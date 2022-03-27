@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import edu.immune.cache.core.JsonKVStore;
+import edu.immune.cache.store.file.impl.JsonKVStore;
 
 public class JsonKVStoreTest {
 
