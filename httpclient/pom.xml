@@ -16,7 +16,7 @@
 		<!-- External Dependencies versions -->
 		<junit.version>4.13.1</junit.version>
 		<slf4j.version>1.7.18</slf4j.version>
-		<commonslang.version>3.0</commonslang.version>
+		<commonslang.version>3.18.0</commonslang.version>
 		<org.glassfish.jersey.version>2.22.1</org.glassfish.jersey.version>
 		<apache.httpclient.version>4.5.13</apache.httpclient.version>
 		
